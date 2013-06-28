@@ -1,0 +1,113 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:id="@+id/layout_container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" >
+
+            <LinearLayout
+                android:id="@+id/layout_controls"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp" >
+
+                <include
+                    android:id="@+id/slider_frames_skip"
+                    layout="@layout/slider" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="8dp" />
+
+                <include
+                    android:id="@+id/slider_motion_blur"
+                    layout="@layout/slider" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="8dp" />
+
+                <include
+                    android:id="@+id/slider_snow_count"
+                    layout="@layout/slider" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="8dp" />
+
+                <include
+                    android:id="@+id/slider_snow_speed"
+                    layout="@layout/slider" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="8dp" />
+
+                <include
+                    android:id="@+id/slider_touch_sensitivity"
+                    layout="@layout/slider" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="8dp" />
+
+                <include
+                    android:id="@+id/slider_turbulence"
+                    layout="@layout/slider" />
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="8dp"
+            android:background="@drawable/control_background"
+            android:orientation="horizontal"
+            android:padding="8dp" >
+
+            <Button
+                android:id="@+id/button_default_settings"
+                android:layout_width="160dp"
+                android:layout_height="56dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/button_background"
+                android:text="@string/default_settings"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/layout_toggle_background"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="@drawable/button_background"
+                android:orientation="horizontal" >
+
+                <ImageButton
+                    android:id="@+id/button_toggle_controls"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@null"
+                    android:padding="8dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/arrow_up" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

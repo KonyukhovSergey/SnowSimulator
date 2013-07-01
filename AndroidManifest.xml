@@ -17,7 +17,7 @@
         android:name=".app"
         android:theme="@style/AppTheme" >
         <service
-            android:name=".Wallpaper1Service"
+            android:name=".SnowWallpaperService"
             android:label="@string/service_label"
             android:permission="android.permission.BIND_WALLPAPER" >
             <intent-filter>
@@ -30,7 +30,7 @@
         </service>
 
         <activity
-            android:name=".ActivityWallpaper1"
+            android:name=".ActivitySnowWallpaper"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >

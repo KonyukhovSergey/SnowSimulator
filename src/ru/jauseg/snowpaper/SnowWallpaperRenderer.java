@@ -18,9 +18,9 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.MotionEvent;
 
-public class Wallpaper1Renderer implements GLWallpaperService.Renderer, FlingDetectorListener, FrameRateUpdateInterface
+public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, FlingDetectorListener, FrameRateUpdateInterface
 {
-	private static final String TAG = "Wallpaper1Renderer";
+	private static final String TAG = "SnowWallpaperRenderer";
 
 	private FlingDetector flingDetector;
 
@@ -37,7 +37,7 @@ public class Wallpaper1Renderer implements GLWallpaperService.Renderer, FlingDet
 
 	FrameRateCalculator fps;
 
-	public Wallpaper1Renderer(Context context)
+	public SnowWallpaperRenderer(Context context)
 	{
 		flingDetector = new FlingDetector(this);
 		bitmapShows = TextureManager.load(context, "snows.png");

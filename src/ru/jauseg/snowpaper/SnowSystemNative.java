@@ -2,17 +2,8 @@ package ru.jauseg.snowpaper;
 
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.util.Random;
-
 import javax.microedition.khronos.opengles.GL10;
-import javax.microedition.khronos.opengles.GL11;
-
-import android.os.SystemClock;
 import android.util.Log;
-import android.widget.Toast;
-import js.data.IndexerContainer;
-import js.engine.BufferAllocator;
 import js.engine.TextureManager;
 import js.jni.code.NativeCalls;
 

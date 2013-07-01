@@ -19,12 +19,12 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
-public class ActivityWallpaper1 extends Activity
+public class ActivitySnowWallpaper extends Activity
 {
-	private static final String TAG = "ActivityWallpaper1";
+	private static final String TAG = "ActivitySnowWallpaper";
 
 	private GLSurfaceView engine;
-	private Wallpaper1Renderer renderer;
+	private SnowWallpaperRenderer renderer;
 
 	private SeekBarControl seekBarMotionBlur;
 	private SeekBarControl seekBarTouchSensitivy;
@@ -53,7 +53,7 @@ public class ActivityWallpaper1 extends Activity
 		super.onCreate(savedInstanceState);
 
 		engine = new GLSurfaceView(this);
-		renderer = new Wallpaper1Renderer(this);
+		renderer = new SnowWallpaperRenderer(this);
 		engine.setRenderer(renderer);
 		engine.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
 		setContentView(R.layout.setup);

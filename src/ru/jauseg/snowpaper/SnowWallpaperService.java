@@ -1,12 +1,11 @@
 package ru.jauseg.snowpaper;
 
-import android.util.Log;
-import android.view.MotionEvent;
 import net.rbgrn.android.glwallpaperservice.GLWallpaperService;
+import android.view.MotionEvent;
 
-public class Wallpaper1Service extends GLWallpaperService
+public class SnowWallpaperService extends GLWallpaperService
 {
-	public Wallpaper1Service()
+	public SnowWallpaperService()
 	{
 		super();
 	}
@@ -19,12 +18,12 @@ public class Wallpaper1Service extends GLWallpaperService
 
 	class Wallpaper1Engine extends GLEngine
 	{
-		Wallpaper1Renderer renderer;
+		SnowWallpaperRenderer renderer;
 
 		public Wallpaper1Engine()
 		{
 			super();
-			renderer = new Wallpaper1Renderer(Wallpaper1Service.this);
+			renderer = new SnowWallpaperRenderer(SnowWallpaperService.this);
 			setRenderer(renderer);
 			setRenderMode(RENDERMODE_CONTINUOUSLY);
 		}

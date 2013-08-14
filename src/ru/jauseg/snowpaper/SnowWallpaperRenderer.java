@@ -9,7 +9,6 @@ import js.engine.TextureManager;
 import js.engine.FrameRateCalculator.FrameRateUpdateInterface;
 import js.gesture.FlingDetector;
 import js.gesture.FlingDetector.FlingDetectorListener;
-import js.jni.code.NativeCalls;
 import net.rbgrn.android.glwallpaperservice.GLWallpaperService;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -35,7 +34,7 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 	private float height;
 	private float offset = 0.5f;;
 
-	FrameRateCalculator fps;
+	private FrameRateCalculator fps;
 
 	public SnowWallpaperRenderer(Context context)
 	{

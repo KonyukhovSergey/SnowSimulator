@@ -59,7 +59,7 @@ public class SnowSystemNative
 		return (int) width;
 	}
 
-	public void draw(GL10 gl, TextureManager textures)
+	public void draw(GL10 gl)
 	{
 		gl.glEnableClientState(GL10.GL_COLOR_ARRAY);
 

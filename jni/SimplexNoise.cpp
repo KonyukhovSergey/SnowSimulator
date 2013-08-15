@@ -3,6 +3,7 @@
  *
  *  Created on: 14.08.2013
  *      Author: konyukhov.sergey
+ *
  */
 
 #include "SimplexNoise.h"
@@ -24,11 +25,8 @@ short p[] = { 151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 233, 7, 
 
 
 SimplexNoise::SimplexNoise() {
-	// TODO Auto-generated constructor stub
-
 }
 
 SimplexNoise::~SimplexNoise() {
-	// TODO Auto-generated destructor stub
 }
 

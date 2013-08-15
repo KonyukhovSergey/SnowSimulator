@@ -3,6 +3,9 @@
  *
  *  Created on: 14.08.2013
  *      Author: konyukhov.sergey
+ *
+ *      code based from java code.
+ *
  */
 
 #ifndef SIMPLEXNOISE_H_
@@ -16,7 +19,7 @@
 #define F2 0.36602540
 #define G2 0.21132486
 #define F3 0.33333333
-#define G3 0.16666666
+#define G3 0.16666667
 
 extern int grad3[][3];
 extern short p[];

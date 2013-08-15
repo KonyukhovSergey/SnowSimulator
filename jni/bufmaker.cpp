@@ -29,6 +29,7 @@ extern "C"
 	JNIEXPORT void JNICALL Java_js_jni_code_NativeCalls_ssInit(JNIEnv *env, jclass, jfloat a, jfloat b)
 	{
 		ss.init(a, b);
+		SimplexNoise::init();
 	}
 
 	JNIEXPORT jint JNICALL Java_js_jni_code_NativeCalls_ssDraw(JNIEnv *env, jclass, jobject vertexCoords,
@@ -57,6 +58,29 @@ extern "C"
 	{
 		ss.free();
 	}
+
+	JNIEXPORT void JNICALL Java_js_jni_code_NativeCalls_noise(JNIEnv *env, jclass, jobject buffer,
+			jint size, jfloat freq, jfloat time)
+	{
+		unsigned int * pBuf = (unsigned int *) env->GetDirectBufferAddress(buffer);
+
+		int length = size * size;
+
+		for (int i = 0; i < length; i++)
+		{
+			float x = ((float) (i % size)) / freq;
+			float y = ((float) (i / size)) / freq;
+
+			int r = (int) (128.0f * (1.0f + SimplexNoise::noise(x, y, time)));
+			int g = (int) (128.0f * (1.0f + SimplexNoise::noise(x + size, y, time)));
+			int b = (int) (128.0f * (1.0f + SimplexNoise::noise(x, y + size, time)));
+
+			*pBuf = 0xff000000 | ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff);
+			pBuf++;
+		}
+	}
+
+
 
 }
 

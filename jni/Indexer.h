@@ -10,119 +10,119 @@
 
 struct TwoLinkedList
 {
-	void *object;
-	TwoLinkedList *prev;
-	TwoLinkedList *next;
+		void *object;
+		TwoLinkedList *prev;
+		TwoLinkedList *next;
 
-	TwoLinkedList()
-	{
-		object = 0;
-		prev = 0;
-		next = 0;
-	}
-
-	/**
-	 * insert new item after this item
-	 *
-	 * @param item
-	 */
-	void insert(TwoLinkedList *item)
-	{
-		item->prev = this;
-		item->next = next;
-
-		if (next)
+		TwoLinkedList()
 		{
-			next->prev = item;
+			object = 0;
+			prev = 0;
+			next = 0;
 		}
 
-		next = item;
-	}
-
-	TwoLinkedList* remove()
-	{
-		if (prev)
+		/**
+		 * insert new item after this item
+		 *
+		 * @param item
+		 */
+		void insert(TwoLinkedList *item)
 		{
-			prev->next = next;
+			item->prev = this;
+			item->next = next;
+
+			if (next)
+			{
+				next->prev = item;
+			}
+
+			next = item;
 		}
 
-		if (next)
+		TwoLinkedList* remove()
 		{
-			next->prev = prev;
+			if (prev)
+			{
+				prev->next = next;
+			}
+
+			if (next)
+			{
+				next->prev = prev;
+			}
+
+			prev = 0;
+			next = 0;
+
+			return this;
 		}
-
-		prev = 0;
-		next = 0;
-
-		return this;
-	}
 };
 
 class Indexer
 {
-private:
+	private:
 
-	TwoLinkedList freeList;
-	TwoLinkedList usedList;
+		TwoLinkedList freeList;
+		TwoLinkedList usedList;
 
-	void freeTwoLinkedlist(TwoLinkedList *item)
-	{
-		while (item)
+		void freeTwoLinkedlist(TwoLinkedList *item)
 		{
-			TwoLinkedList *tempItem = item;
-			item = item->next;
-			delete tempItem;
+			while (item)
+			{
+				TwoLinkedList *tempItem = item;
+				item = item->next;
+				delete tempItem;
+			}
 		}
-	}
 
-public:
-	Indexer();
-	virtual ~Indexer();
+	public:
+		Indexer();
+		virtual ~Indexer();
 
-	void free()
-	{
-		freeTwoLinkedlist(freeList.next);
-		freeList.next = 0;
-		freeTwoLinkedlist(usedList.next);
-		usedList.next = 0;
-	}
-
-	TwoLinkedList* allocate()
-	{
-		TwoLinkedList *item = freeList.next;
-
-		if (item == 0)
+		void free()
 		{
-			item = new TwoLinkedList();
+			freeTwoLinkedlist(freeList.next);
+			freeList.next = 0;
+			freeTwoLinkedlist(usedList.next);
+			usedList.next = 0;
 		}
-		else
+
+		TwoLinkedList* allocate()
+		{
+			TwoLinkedList *item = freeList.next;
+
+			if (item == 0)
+			{
+				item = new TwoLinkedList();
+			}
+			else
+			{
+				item->remove();
+			}
+
+			usedList.insert(item);
+
+			return item;
+		}
+
+		void release(TwoLinkedList *item)
 		{
 			item->remove();
+			freeList.insert(item);
 		}
 
-		usedList.insert(item);
+		TwoLinkedList* getFirst()
+		{
+			return usedList.next;
+		}
 
-		return item;
-	}
-
-	void release(TwoLinkedList *item)
-	{
-		item->remove();
-		freeList.insert(item);
-	}
-
-	TwoLinkedList* getFirst()
-	{
-		return usedList.next;
-	}
-
-	TwoLinkedList* releaseAndGetNext(TwoLinkedList* item)
-	{
-		TwoLinkedList *rValue = item->next;
-		item->remove();
-		freeList.insert(item);
-		return rValue;
-	}
+		TwoLinkedList* releaseAndGetNext(TwoLinkedList* item)
+		{
+			TwoLinkedList *rValue = item->next;
+			item->remove();
+			freeList.insert(item);
+			return rValue;
+		}
 
 };
 

@@ -12,6 +12,7 @@ import js.gesture.FlingDetector.FlingDetectorListener;
 import net.rbgrn.android.glwallpaperservice.GLWallpaperService;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.opengl.GLU;
 import android.opengl.GLUtils;
 import android.os.SystemClock;
@@ -27,6 +28,7 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 	private FlingDetector flingDetector;
 
 	private Bitmap bitmapShows;
+	private Bitmap bitmapNoise;
 
 	private TextureManager textures;
 	private int textureSnowsIndex = 0;
@@ -50,6 +52,7 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 		app.indexSnowCount(app.indexSnowCount());
 		app.indexSnowSpeed(app.indexSnowSpeed());
 		app.indexTurbulence(app.indexTurbulence());
+		bitmapNoise = Bitmap.createBitmap(32, 32, Config.ARGB_8888);
 	}
 
 	@Override
@@ -150,9 +153,8 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 
 		//if (noiseCounter % 5 == 0)
 		{
-			Bitmap bmp = TextureManager.noise(32, 16, ((float) noiseCounter) / 250.0f);
-			GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bmp, 0);
-			bmp.recycle();
+			TextureManager.noise(bitmapNoise, 16, ((float) noiseCounter) / 250.0f);
+			GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmapNoise, 0);
 		}
 		noiseCounter++;
 

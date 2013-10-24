@@ -142,6 +142,7 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 			SystemClock.sleep(18);
 			app.ss.skip();
 			framesToSkip--;
+			noiseCounter++;
 		}
 		framesToSkip = app.indexFramesSkip();
 
@@ -152,7 +153,7 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 		// gl.glDisable(GL10.GL_BLEND);
 
 		gl.glVertexPointer(2, GL10.GL_FLOAT, 0, posBuffer.buffer);
-		
+
 		if (app.isBackgroundStatic())
 		{
 			textures.useTexture(gl, textureSnowsIndex);

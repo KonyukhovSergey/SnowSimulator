@@ -19,6 +19,8 @@ public class NativeCalls
 	public static native void ssSetSnowSpeed(float value);
 
 	public static native void ssSetSnowCount(int value);
+	
+	public static native void noise(Buffer buffer, int size, float freq, float offset, float time);
 
 	static
 	{

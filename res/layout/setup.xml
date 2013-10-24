@@ -6,7 +6,8 @@
     <LinearLayout
         android:id="@+id/layout_container"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
     </LinearLayout>
 
     <LinearLayout
@@ -69,6 +70,12 @@
                 <include
                     android:id="@+id/slider_turbulence"
                     layout="@layout/slider" />
+
+                <CheckBox
+                    android:id="@+id/check_box_background"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="static background" />
             </LinearLayout>
         </ScrollView>
 

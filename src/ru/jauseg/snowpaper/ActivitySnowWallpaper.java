@@ -15,6 +15,9 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
@@ -46,6 +49,8 @@ public class ActivitySnowWallpaper extends Activity
 	private Animation animationMoveFromUp;
 
 	private View layoutControls;
+
+	private CheckBox checkBoxBackground;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -97,6 +102,18 @@ public class ActivitySnowWallpaper extends Activity
 		layoutControls = findViewById(R.id.layout_controls);
 		buttonDefaultSettings = (Button) findViewById(R.id.button_default_settings);
 		buttonDefaultSettings.setOnClickListener(onClickListener);
+
+		checkBoxBackground = (CheckBox) findViewById(R.id.check_box_background);
+		checkBoxBackground.setChecked(app.isBackgroundStatic());
+		
+		checkBoxBackground.setOnCheckedChangeListener(new OnCheckedChangeListener()
+		{
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+			{
+				app.isBackgroundStatic(isChecked);
+			}
+		});
 	}
 
 	@Override
@@ -138,34 +155,33 @@ public class ActivitySnowWallpaper extends Activity
 		{
 			switch (id)
 			{
-				case R.id.slider_motion_blur:
-					app.indexMotionBlur(pos);
-					break;
+			case R.id.slider_motion_blur:
+				app.indexMotionBlur(pos);
+				break;
 
-				case R.id.slider_touch_sensitivity:
-					app.indexTouchSensitivity(pos);
-					break;
+			case R.id.slider_touch_sensitivity:
+				app.indexTouchSensitivity(pos);
+				break;
 
-				case R.id.slider_turbulence:
-					app.indexTurbulence(pos);
-					break;
+			case R.id.slider_turbulence:
+				app.indexTurbulence(pos);
+				break;
 
-				case R.id.slider_frames_skip:
-					app.indexFramesSkip(pos);
-					break;
+			case R.id.slider_frames_skip:
+				app.indexFramesSkip(pos);
+				break;
 
-				case R.id.slider_snow_count:
-					app.indexSnowCount(pos);
-					break;
+			case R.id.slider_snow_count:
+				app.indexSnowCount(pos);
+				break;
 
-				case R.id.slider_snow_speed:
-					app.indexSnowSpeed(pos);
-					break;
+			case R.id.slider_snow_speed:
+				app.indexSnowSpeed(pos);
+				break;
 
-				default:
-					break;
+			default:
+				break;
 			}
-
 		}
 	};
 
@@ -197,13 +213,13 @@ public class ActivitySnowWallpaper extends Activity
 	{
 		buttonDefaultSettings.startAnimation(animationButtonPress);
 
-//		app.indexFramesSkip(0);
-//		app.indexMotionBlur(4);
-//		app.indexSnowCount(3);
-//		app.indexSnowSpeed(2);
-//		app.indexTouchSensitivity(3);
-//		app.indexTurbulence(3);
-//		
+		// app.indexFramesSkip(0);
+		// app.indexMotionBlur(4);
+		// app.indexSnowCount(3);
+		// app.indexSnowSpeed(2);
+		// app.indexTouchSensitivity(3);
+		// app.indexTurbulence(3);
+		//
 		seekBarFramesSkip.position(0);
 		seekBarMotionBlur.position(4);
 		seekBarSnowCount.position(3);
@@ -219,13 +235,13 @@ public class ActivitySnowWallpaper extends Activity
 		{
 			switch (v.getId())
 			{
-				case R.id.button_toggle_controls:
-					buttonToggleControlsClick();
-					break;
+			case R.id.button_toggle_controls:
+				buttonToggleControlsClick();
+				break;
 
-				case R.id.button_default_settings:
-					buttonDefaultSettingsClick();
-					break;
+			case R.id.button_default_settings:
+				buttonDefaultSettingsClick();
+				break;
 			}
 		}
 	};

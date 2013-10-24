@@ -1,14 +1,19 @@
 package ru.jauseg.snowpaper;
 
+import java.nio.Buffer;
+
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import js.engine.BufferAllocator;
 import js.engine.FrameRateCalculator;
 import js.engine.QuadBuffer;
+import js.engine.SimplexNoise;
 import js.engine.TextureManager;
 import js.engine.FrameRateCalculator.FrameRateUpdateInterface;
 import js.gesture.FlingDetector;
 import js.gesture.FlingDetector.FlingDetectorListener;
+import js.jni.code.NativeCalls;
 import net.rbgrn.android.glwallpaperservice.GLWallpaperService;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -52,7 +57,8 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 		app.indexSnowCount(app.indexSnowCount());
 		app.indexSnowSpeed(app.indexSnowSpeed());
 		app.indexTurbulence(app.indexTurbulence());
-		bitmapNoise = Bitmap.createBitmap(32, 32, Config.ARGB_8888);
+		int size = 32;
+		bitmapNoise = Bitmap.createBitmap(size, size, Config.ARGB_8888);
 	}
 
 	@Override
@@ -126,7 +132,7 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 		}
 	}
 
-	private int noiseCounter = 0;
+	int noiseCounter = 0;
 
 	@Override
 	public void onDrawFrame(GL10 gl)
@@ -144,20 +150,21 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 		gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
 
 		// gl.glDisable(GL10.GL_BLEND);
+
 		gl.glVertexPointer(2, GL10.GL_FLOAT, 0, posBuffer.buffer);
-
-		// textures.useTexture(gl, textureSnowsIndex);
-		textures.useCoords(gl, 8);
-
-		textures.useTexture(gl, textureNoiseIndex);
-
-		//if (noiseCounter % 5 == 0)
+		
+		if (app.isBackgroundStatic())
 		{
-			TextureManager.noise(bitmapNoise, 16, ((float) noiseCounter) / 250.0f);
+			textures.useTexture(gl, textureSnowsIndex);
+			textures.useCoords(gl, 8);
+		}
+		else
+		{
+			noise(bitmapNoise, 16, 0, ((float) noiseCounter) / 500.0f);
+			textures.useTexture(gl, textureNoiseIndex);
+			textures.useCoords(gl, 9);
 			GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmapNoise, 0);
 		}
-		noiseCounter++;
-
 		gl.glPushMatrix();
 		gl.glColor4f(1, 1, 1, app.getMotionBlur());
 
@@ -211,7 +218,7 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 			textures.createCoords(x, y, 64, 64, 256, 256);
 		}
 
-		// textures.createCoords(0, 128, 256, 128, 256, 256);
+		textures.createCoords(0, 128, 256, 128, 256, 256);
 		textures.createCoords(0, 0, 32, 32, 32, 32);
 	}
 
@@ -219,6 +226,25 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 	public void onFrameRateUpdate(FrameRateCalculator frameRateCalculator)
 	{
 		// Log.v(TAG, frameRateCalculator.frameString());
+	}
+
+	Buffer pixels = null;
+
+	public void noise(Bitmap bmp, float freq, float offset, float time)
+	{
+		int size = bmp.getWidth();
+
+		if (pixels == null)
+		{
+			pixels = BufferAllocator.createBuffer(4 * size * size);
+		}
+
+		NativeCalls.noise(pixels, size, freq, offset, time);
+
+		// bmp.setPixels(pixels, 0, size, 0, 0, size, size);
+		pixels.position(0);
+		bmp.copyPixelsFromBuffer(pixels);
+
 	}
 
 }

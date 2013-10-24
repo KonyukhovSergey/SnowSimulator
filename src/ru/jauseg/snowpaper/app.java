@@ -15,6 +15,7 @@ public class app extends Application
 	private static int indexTurbulence;
 	private static int indexSnowCount;
 	private static int indexSnowSpeed;
+	private static boolean isBackgroundStatic;
 
 	public static SnowSettings cfg = null;
 	public static SnowSystemNative ss = null;
@@ -34,6 +35,7 @@ public class app extends Application
 		indexTurbulence = Integer.parseInt(cfg.get(SnowSettings.TURBULENCE));
 		indexSnowCount = Integer.parseInt(cfg.get(SnowSettings.SNOW_COUNT));
 		indexSnowSpeed = Integer.parseInt(cfg.get(SnowSettings.SNOW_SPEED));
+		isBackgroundStatic=cfg.get(cfg.BACKGROUND).equals("static");
 
 	}
 
@@ -78,6 +80,17 @@ public class app extends Application
 	public static int indexSnowSpeed()
 	{
 		return indexSnowSpeed;
+	}
+
+	public static boolean isBackgroundStatic()
+	{
+		return isBackgroundStatic;
+	}
+
+	public static void isBackgroundStatic(boolean value)
+	{
+		isBackgroundStatic = value;
+		cfg.set(cfg.BACKGROUND, value ? "static" : "noise");
 	}
 
 	public static void indexSnowCount(int value)

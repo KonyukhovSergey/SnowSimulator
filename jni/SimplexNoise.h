@@ -24,13 +24,14 @@
 extern int grad3[][3];
 extern short p[];
 
+extern short perm[512];
+extern short permMod12[512];
+
 class SimplexNoise
 {
 
 	private:
 
-		static short perm[512];
-		static short permMod12[512];
 
 		static int fastfloor(double x)
 		{

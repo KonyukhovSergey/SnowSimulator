@@ -137,6 +137,7 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 	@Override
 	public void onDrawFrame(GL10 gl)
 	{
+		noiseCounter++;
 		while (framesToSkip > 0)
 		{
 			SystemClock.sleep(18);

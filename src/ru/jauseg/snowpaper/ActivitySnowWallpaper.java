@@ -2,9 +2,6 @@ package ru.jauseg.snowpaper;
 
 import ru.jauseg.snowpaper.SeekBarControl.OnSeekBarControlPositionChangeListener;
 import android.app.Activity;
-import android.content.res.Configuration;
-import android.graphics.drawable.Animatable;
-import android.graphics.drawable.AnimationDrawable;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,8 +16,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class ActivitySnowWallpaper extends Activity
 {

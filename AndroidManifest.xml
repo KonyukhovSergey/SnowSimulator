@@ -26,7 +26,7 @@
 
             <meta-data
                 android:name="android.service.wallpaper"
-                android:resource="@xml/glwallpapertest" />
+                android:resource="@xml/gl_snow_wallpaper" />
         </service>
 
         <activity

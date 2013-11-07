@@ -13,14 +13,14 @@ public class SnowWallpaperService extends GLWallpaperService
 	@Override
 	public Engine onCreateEngine()
 	{
-		return new Wallpaper1Engine();
+		return new SnowWallpaperEngine();
 	}
 
-	class Wallpaper1Engine extends GLEngine
+	class SnowWallpaperEngine extends GLEngine
 	{
 		SnowWallpaperRenderer renderer;
 
-		public Wallpaper1Engine()
+		public SnowWallpaperEngine()
 		{
 			super();
 			renderer = new SnowWallpaperRenderer(SnowWallpaperService.this);

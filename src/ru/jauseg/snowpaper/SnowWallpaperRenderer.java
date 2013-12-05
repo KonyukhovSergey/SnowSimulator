@@ -48,6 +48,11 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 
 	private FrameRateCalculator fps;
 
+	// private SnakeLine sLine = new SnakeLine(20, new float[] { 0, 0.0f /
+	// 256.0f, 64.0f / 256.0f, 64.0f / 256.0f });
+	private SnakeLine sLine = new SnakeLine(100, new float[] { 0.50f, 0.01f, 0.75f, 0.25f});
+//	private SnakeLine sLine = new SnakeLine(50, new float[] { 0.25f, 0.01f, 0.5f, 0.25f});
+
 	public SnowWallpaperRenderer(Context context)
 	{
 		flingDetector = new FlingDetector(this);
@@ -79,7 +84,7 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 
 		gl.glShadeModel(GL10.GL_SMOOTH);
 		gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_NICEST);
-
+		
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
 		gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
 
@@ -130,6 +135,7 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 				app.ss = new SnowSystemNative(width, height, textures);
 			}
 		}
+
 	}
 
 	int noiseCounter = 0;
@@ -179,6 +185,11 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 		gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE);
 		textures.useTexture(gl, textureSnowsIndex);
 		app.ss.draw(gl);
+
+		// gl.glDisableClientState(gl.GL_COLOR_ARRAY);
+		gl.glColor4f(1, 1, 1, 0.5f);
+
+		sLine.draw(gl);
 
 		fps.frameDone();
 		// SystemClock.sleep(10);

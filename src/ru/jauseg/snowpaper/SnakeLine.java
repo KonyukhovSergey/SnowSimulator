@@ -32,13 +32,12 @@ public class SnakeLine
 
 		for (int i = 0; i < count; i++)
 		{
-			float a = (float)i/(float)count;
-			 points[i] = new Vector2D(400+250*FloatMath.cos(a*5.0f) ,500+400*FloatMath.sin(a*5.0f));
-			//points[i] = new Vector2D(30 * i + 20, 30 * i + 20);
+			float a = (float) i / (float) count;
+			points[i] = new Vector2D(400 + 250 * FloatMath.cos(a * 5.0f), 500 + 400 * FloatMath.sin(a * 5.0f));
+			// points[i] = new Vector2D(30 * i + 20, 30 * i + 20);
 			widths[i] = 100.0f;// + rnd.nextFloat() * 40.0f;
 		}
 
-		
 		fillTextures(textureCoords);
 
 		vertexes = BufferAllocator.createFloatBuffer(count * 2 * 2);
@@ -103,8 +102,8 @@ public class SnakeLine
 			n2.normalize();
 
 			nr.plus(n1, n2);
-			//nr.normalize();
-			nr.scale(widths[i]*0.5f);
+			// nr.normalize();
+			nr.scale(widths[i] * 0.5f);
 
 			vertexes.put(p.x - nr.x);
 			vertexes.put(p.y - nr.y);

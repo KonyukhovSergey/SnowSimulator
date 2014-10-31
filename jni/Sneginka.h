@@ -18,87 +18,92 @@ extern float scale;
 
 extern float turbulence;
 extern float snowSpeed;
+extern float parallax;
+
+extern float ax, ay, az;
 
 class Sneginka
 {
-public:
-	Vector2D pos;
-	Vector2D vel;
-	float alfa;
-	float size;
+	public:
+		Vector2D pos;
+		Vector2D vel;
+		float alfa;
+		float size;
 
-	void init(float width, float height)
-	{
-		init(0, 0, width, height);
-	}
+		void init(float width, float height)
+		{
+			init(0, 0, width, height);
+		}
 
-	void init(float left, float top, float width, float height)
-	{
-		alfa = rndf() * 0.75f + 0.25f;
-		pos.set(rndf() * width + left, rndf() * height + top);
-		vel.set(0, 0);
-		size = (rndf() * 120.0f + 8.0f) * scale;
-	}
+		void init(float left, float top, float width, float height)
+		{
+			alfa = rndf() * 0.75f + 0.25f;
+			pos.set(rndf() * width + left, rndf() * height + top);
+			vel.set(0, 0);
+			size = (rndf() * 120.0f + 8.0f) * scale;
+		}
 
-	void putTo(float *pVertex, int *pColor)
-	{
-		float x = pos.x;
-		float y = pos.y;
-		float s = size * 0.5f;
+		void putTo(float *pVertex, int *pColor)
+		{
+			float dc = (size - 120 * scale) * parallax;
+			float dx = ax * dc;
+			float dy = -ay * dc;
 
-		unsigned int c = 0xFFFFFF
-				| (((unsigned int) (255.0f
-						* ((1.0f - size / (scale * 148.0f)) * alfa))) << 24);
+			float x = pos.x + dx;
+			float y = pos.y + dy;
+			float s = size * 0.5f;
 
-		*pVertex = x - s;
-		pVertex++;
-		*pVertex = y - s;
-		pVertex++;
-		*pVertex = x + s;
-		pVertex++;
-		*pVertex = y - s;
-		pVertex++;
-		*pVertex = x + s;
-		pVertex++;
-		*pVertex = y + s;
-		pVertex++;
-		*pVertex = x - s;
-		pVertex++;
-		*pVertex = y - s;
-		pVertex++;
-		*pVertex = x + s;
-		pVertex++;
-		*pVertex = y + s;
-		pVertex++;
-		*pVertex = x - s;
-		pVertex++;
-		*pVertex = y + s;
-		//pVertex++;
+			unsigned int c = 0xFFFFFF | (((unsigned int) (255.0f * ((1.0f - size / (scale * 148.0f)) * alfa))) << 24);
 
-		*pColor = c;
-		pColor++;
-		*pColor = c;
-		pColor++;
-		*pColor = c;
-		pColor++;
-		*pColor = c;
-		pColor++;
-		*pColor = c;
-		pColor++;
-		*pColor = c;
-		//pColor++;
-	}
+			*pVertex = x - s;
+			pVertex++;
+			*pVertex = y - s;
+			pVertex++;
+			*pVertex = x + s;
+			pVertex++;
+			*pVertex = y - s;
+			pVertex++;
+			*pVertex = x + s;
+			pVertex++;
+			*pVertex = y + s;
+			pVertex++;
+			*pVertex = x - s;
+			pVertex++;
+			*pVertex = y - s;
+			pVertex++;
+			*pVertex = x + s;
+			pVertex++;
+			*pVertex = y + s;
+			pVertex++;
+			*pVertex = x - s;
+			pVertex++;
+			*pVertex = y + s;
+			//pVertex++;
 
-	void tick(WindSimulator *wind)
-	{
-		float s = scale * size * snowSpeed;
-		pos.x += vel.x * s;
-		pos.y += vel.y * s;
-		vel.y += 0.05f;
-		wind->calcAt(&pos, &vel, turbulence);
-		vel.x *= 0.97f;
-		vel.y *= 0.97f;
-	}
+			*pColor = c;
+			pColor++;
+			*pColor = c;
+			pColor++;
+			*pColor = c;
+			pColor++;
+			*pColor = c;
+			pColor++;
+			*pColor = c;
+			pColor++;
+			*pColor = c;
+			//pColor++;
+		}
+
+		void tick(WindSimulator *wind)
+		{
+			float s = scale * size * snowSpeed;
+			pos.x += vel.x * s;
+			pos.y += vel.y * s;
+			vel.y += 0.05f;
+			wind->calcAt(&pos, &vel, turbulence);
+			vel.x *= 0.97f;
+			vel.y *= 0.97f;
+		}
 };
 
 #endif /* SNEGINKA_H_ */

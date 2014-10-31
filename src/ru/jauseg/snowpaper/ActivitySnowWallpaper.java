@@ -30,6 +30,7 @@ public class ActivitySnowWallpaper extends Activity
 	private SeekBarControl seekBarFramesSkip;
 	private SeekBarControl seekBarSnowCount;
 	private SeekBarControl seekBarSnowSpeed;
+	private SeekBarControl seekBarParallax;
 
 	private boolean isControls = true;
 	private ImageButton buttonToggleControls;
@@ -44,8 +45,6 @@ public class ActivitySnowWallpaper extends Activity
 	private Animation animationMoveFromUp;
 
 	private View layoutControls;
-
-	private CheckBox checkBoxBackground;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -69,6 +68,9 @@ public class ActivitySnowWallpaper extends Activity
 		seekBarTurbulence = new SeekBarControl(app.indexTurbulence(), 0, app.tableTurbulence.length - 1,
 				findViewById(R.id.slider_turbulence), R.string.turbulence);
 
+		seekBarParallax = new SeekBarControl(app.indexParalax(), 0, app.tableParallax.length - 1,
+				findViewById(R.id.slider_parallax), R.string.parallax);
+
 		seekBarFramesSkip = new SeekBarControl(app.indexFramesSkip(), 0, 6, findViewById(R.id.slider_frames_skip),
 				R.string.frames_skip);
 
@@ -81,6 +83,7 @@ public class ActivitySnowWallpaper extends Activity
 		seekBarMotionBlur.setOnSeekBarControlPositionChangeListener(onSeekBarControlPositionChangeListener);
 		seekBarTouchSensitivy.setOnSeekBarControlPositionChangeListener(onSeekBarControlPositionChangeListener);
 		seekBarTurbulence.setOnSeekBarControlPositionChangeListener(onSeekBarControlPositionChangeListener);
+		seekBarParallax.setOnSeekBarControlPositionChangeListener(onSeekBarControlPositionChangeListener);
 		seekBarFramesSkip.setOnSeekBarControlPositionChangeListener(onSeekBarControlPositionChangeListener);
 		seekBarSnowCount.setOnSeekBarControlPositionChangeListener(onSeekBarControlPositionChangeListener);
 		seekBarSnowSpeed.setOnSeekBarControlPositionChangeListener(onSeekBarControlPositionChangeListener);
@@ -98,23 +101,13 @@ public class ActivitySnowWallpaper extends Activity
 		buttonDefaultSettings = (Button) findViewById(R.id.button_default_settings);
 		buttonDefaultSettings.setOnClickListener(onClickListener);
 
-		checkBoxBackground = (CheckBox) findViewById(R.id.check_box_background);
-		checkBoxBackground.setChecked(app.isBackgroundStatic());
-		
-		checkBoxBackground.setOnCheckedChangeListener(new OnCheckedChangeListener()
-		{
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-			{
-				app.isBackgroundStatic(isChecked);
-			}
-		});
+		app.isBackgroundStatic(true);
 	}
 
 	@Override
 	protected void onResume()
 	{
-		Log.v(TAG, "onResume");
+		app.accelerometer.start();
 		engine.onResume();
 		super.onResume();
 	}
@@ -122,7 +115,7 @@ public class ActivitySnowWallpaper extends Activity
 	@Override
 	protected void onPause()
 	{
-		Log.v(TAG, "onPause");
+		app.accelerometer.stop();
 		engine.onPause();
 		super.onPause();
 		finish();
@@ -131,7 +124,6 @@ public class ActivitySnowWallpaper extends Activity
 	@Override
 	protected void onDestroy()
 	{
-		Log.v(TAG, "onDestroy");
 		renderer.release();
 		super.onDestroy();
 	}
@@ -160,6 +152,10 @@ public class ActivitySnowWallpaper extends Activity
 
 			case R.id.slider_turbulence:
 				app.indexTurbulence(pos);
+				break;
+
+			case R.id.slider_parallax:
+				app.indexParalax(pos);
 				break;
 
 			case R.id.slider_frames_skip:
@@ -221,6 +217,7 @@ public class ActivitySnowWallpaper extends Activity
 		seekBarSnowSpeed.position(2);
 		seekBarTouchSensitivy.position(3);
 		seekBarTurbulence.position(3);
+		seekBarParallax.position(4);
 	}
 
 	private OnClickListener onClickListener = new OnClickListener()

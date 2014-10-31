@@ -25,57 +25,59 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="8dp" >
+                android:padding="4dp" >
+
+                <include
+                    android:id="@+id/slider_parallax"
+                    layout="@layout/slider" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp" />
 
                 <include
                     android:id="@+id/slider_frames_skip"
                     layout="@layout/slider" />
 
                 <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="8dp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp" />
 
                 <include
                     android:id="@+id/slider_motion_blur"
                     layout="@layout/slider" />
 
                 <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="8dp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp" />
 
                 <include
                     android:id="@+id/slider_snow_count"
                     layout="@layout/slider" />
 
                 <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="8dp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp" />
 
                 <include
                     android:id="@+id/slider_snow_speed"
                     layout="@layout/slider" />
 
                 <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="8dp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp" />
 
                 <include
                     android:id="@+id/slider_touch_sensitivity"
                     layout="@layout/slider" />
 
                 <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="8dp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp" />
 
                 <include
                     android:id="@+id/slider_turbulence"
                     layout="@layout/slider" />
-
-                <CheckBox
-                    android:id="@+id/check_box_background"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="static background" />
             </LinearLayout>
         </ScrollView>
 

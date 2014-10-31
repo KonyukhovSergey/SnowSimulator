@@ -14,7 +14,11 @@ public class NativeCalls
 
 	public static native void ssFling(float x, float y, float dx, float dy);
 
+	public static native void ssAccel(float ax, float ay, float az);
+	
 	public static native void ssSetTurbulence(float value);
+
+	public static native void ssSetParallax(float value);
 
 	public static native void ssSetSnowSpeed(float value);
 

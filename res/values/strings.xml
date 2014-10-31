@@ -7,6 +7,7 @@
     <string name="motion_blur_effect">Motion blur effect</string>
     <string name="touch_sensitivity">Touch sensitivity</string>
     <string name="turbulence">Turbulence</string>
+    <string name="parallax">Parallax</string>
     <string name="snowflakes_count">Snowflakes count</string>
     <string name="frames_skip">Frames skip</string>
     <string name="snow_count">Snowflakes count</string>

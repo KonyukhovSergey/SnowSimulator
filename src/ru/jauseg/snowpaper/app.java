@@ -6,6 +6,8 @@ import java.nio.FloatBuffer;
 import js.engine.BufferAllocator;
 import js.jni.code.NativeCalls;
 import android.app.Application;
+import android.content.Context;
+import android.hardware.SensorManager;
 
 public class app extends Application
 {
@@ -13,6 +15,7 @@ public class app extends Application
 	private static int indexMotionBlur;
 	private static int indexTouchSensitivity;
 	private static int indexTurbulence;
+	private static int indexParalax;
 	private static int indexSnowCount;
 	private static int indexSnowSpeed;
 	private static boolean isBackgroundStatic;
@@ -22,10 +25,14 @@ public class app extends Application
 
 	private static int maxShowCount = 4096;
 
+	public static Accelerometer accelerometer;
+
 	@Override
 	public void onCreate()
 	{
 		super.onCreate();
+
+		accelerometer = new Accelerometer(getBaseContext());
 
 		cfg = new SnowSettings(getBaseContext(), "snow");
 
@@ -33,9 +40,10 @@ public class app extends Application
 		indexMotionBlur = Integer.parseInt(cfg.get(SnowSettings.MOTION_BLUR));
 		indexTouchSensitivity = Integer.parseInt(cfg.get(SnowSettings.TOUCH_SENSITIVITY));
 		indexTurbulence = Integer.parseInt(cfg.get(SnowSettings.TURBULENCE));
+		indexParalax = Integer.parseInt(cfg.get(SnowSettings.PARALAX));
 		indexSnowCount = Integer.parseInt(cfg.get(SnowSettings.SNOW_COUNT));
 		indexSnowSpeed = Integer.parseInt(cfg.get(SnowSettings.SNOW_SPEED));
-		isBackgroundStatic=cfg.get(cfg.BACKGROUND).equals("static");
+		isBackgroundStatic = cfg.get(SnowSettings.BACKGROUND).equals("static");
 
 	}
 
@@ -48,6 +56,8 @@ public class app extends Application
 			0.04f };
 	public static final float[] tableTouchSensitivity = new float[] { 0.10f, 0.25f, 0.33f, 0.50f, 0.66f, 0.75f, 1.00f };
 	public static final float[] tableTurbulence = { 0.10f, 0.25f, 0.33f, 0.5f, 0.66f, 0.75f, 1.00f };
+
+	public static final float[] tableParallax = { 0.00f, 0.05f, 0.10f, 0.15f, 0.20f, 0.25f, 0.30f, 0.35f, 0.40f };
 
 	public static final int[] tableSnowCount = { 32, 16, 8, 4, 2 };
 	public static final float[] tableSnowSpeed = { 1.0f / 64.0f, 1.0f / 48.0f, 1.0f / 32.0f, 1.0f / 24.0f, 1.0f / 16.0f };
@@ -72,6 +82,11 @@ public class app extends Application
 		return indexTurbulence;
 	}
 
+	public static int indexParalax()
+	{
+		return indexParalax;
+	}
+
 	public static int indexSnowCount()
 	{
 		return indexSnowCount;
@@ -90,7 +105,7 @@ public class app extends Application
 	public static void isBackgroundStatic(boolean value)
 	{
 		isBackgroundStatic = value;
-		cfg.set(cfg.BACKGROUND, value ? "static" : "noise");
+		cfg.set(SnowSettings.BACKGROUND, value ? "static" : "noise");
 	}
 
 	public static void indexSnowCount(int value)
@@ -130,6 +145,13 @@ public class app extends Application
 		indexTurbulence = index;
 		cfg.set(SnowSettings.TURBULENCE, Integer.toString(index));
 		NativeCalls.ssSetTurbulence(tableTurbulence[index]);
+	}
+
+	public static void indexParalax(int index)
+	{
+		indexParalax = index;
+		cfg.set(SnowSettings.PARALAX, Integer.toString(index));
+		NativeCalls.ssSetParallax(tableParallax[index]);
 	}
 
 	public static float getMotionBlur()

@@ -48,9 +48,7 @@ public class SnowSystemNative
 
 	private synchronized void init(float w, float h)
 	{
-		Log.v(TAG, "free");
 		NativeCalls.ssFree();
-		Log.v(TAG, String.format("init: w = %d, h = %d", (int) w, (int) h));
 		NativeCalls.ssInit(w, h);
 	}
 

@@ -1,6 +1,7 @@
 package ru.jauseg.snowpaper;
 
 import net.rbgrn.android.glwallpaperservice.GLWallpaperService;
+import android.util.Log;
 import android.view.MotionEvent;
 
 public class SnowWallpaperService extends GLWallpaperService
@@ -27,10 +28,25 @@ public class SnowWallpaperService extends GLWallpaperService
 			setRenderer(renderer);
 			setRenderMode(RENDERMODE_CONTINUOUSLY);
 		}
+		
+		@Override
+		public void onResume()
+		{
+			app.accelerometer.start();
+			super.onResume();
+		}
+		
+		@Override
+		public void onPause()
+		{
+			app.accelerometer.stop();
+			super.onPause();
+		}
 
 		@Override
 		public void onDestroy()
 		{
+			//Log.v(this.getClass().getSimpleName(), "onDestroy");
 			super.onDestroy();
 			if (renderer != null)
 			{

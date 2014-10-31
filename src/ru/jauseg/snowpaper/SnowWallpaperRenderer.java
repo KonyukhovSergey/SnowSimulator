@@ -50,8 +50,10 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 
 	// private SnakeLine sLine = new SnakeLine(20, new float[] { 0, 0.0f /
 	// 256.0f, 64.0f / 256.0f, 64.0f / 256.0f });
-	private SnakeLine sLine = new SnakeLine(100, new float[] { 0.50f, 0.01f, 0.75f, 0.25f});
-//	private SnakeLine sLine = new SnakeLine(50, new float[] { 0.25f, 0.01f, 0.5f, 0.25f});
+	private SnakeLine sLine = new SnakeLine(100, new float[] { 0.50f, 0.01f, 0.75f, 0.25f });
+
+	// private SnakeLine sLine = new SnakeLine(50, new float[] { 0.25f, 0.01f,
+	// 0.5f, 0.25f});
 
 	public SnowWallpaperRenderer(Context context)
 	{
@@ -69,8 +71,6 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 	@Override
 	public void onSurfaceCreated(GL10 gl, EGLConfig config)
 	{
-		Log.v(TAG, "onSurfaceCreated");
-
 		gl.glDisable(GL10.GL_DEPTH_TEST);
 		gl.glDisable(GL10.GL_LIGHTING);
 		gl.glDisable(GL10.GL_CULL_FACE);
@@ -84,7 +84,7 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 
 		gl.glShadeModel(GL10.GL_SMOOTH);
 		gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_NICEST);
-		
+
 		gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
 		gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
 
@@ -94,8 +94,6 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 	@Override
 	public void onSurfaceChanged(GL10 gl, int width, int height)
 	{
-		Log.v(TAG, "onSurfaceChanged");
-
 		this.width = width;
 		this.height = height;
 
@@ -124,14 +122,12 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 
 		if (app.ss == null)
 		{
-			Log.v(TAG, "app.ss == null");
 			app.ss = new SnowSystemNative(width, height, textures);
 		}
 		else
 		{
 			if (app.ss.getWidth() != width)
 			{
-				Log.v(TAG, "width change");
 				app.ss = new SnowSystemNative(width, height, textures);
 			}
 		}
@@ -150,8 +146,10 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 			app.ss.skip();
 			framesToSkip--;
 			noiseCounter++;
+			NativeCalls.ssAccel(app.accelerometer.ax, app.accelerometer.ay, app.accelerometer.az);
 		}
 		framesToSkip = app.indexFramesSkip();
+		NativeCalls.ssAccel(app.accelerometer.ax, app.accelerometer.ay, app.accelerometer.az);
 
 		fps.frameBegin();
 
@@ -176,6 +174,9 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 		gl.glPushMatrix();
 		gl.glColor4f(1, 1, 1, app.getMotionBlur());
 
+		// gl.glTranslatef(width * (-offset + 1.0f) + app.accelerometer.ax *
+		// 10.0f, height * 0.5f + app.accelerometer.ay
+		// * 10.0f, 0);
 		gl.glTranslatef(width * (-offset + 1.0f), height * 0.5f, 0);
 		gl.glScalef(width * 2.01f, height * 1.01f, 1);
 		gl.glDrawArrays(GL10.GL_TRIANGLE_FAN, 0, 4);
@@ -187,9 +188,8 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 		app.ss.draw(gl);
 
 		// gl.glDisableClientState(gl.GL_COLOR_ARRAY);
-		gl.glColor4f(1, 1, 1, 0.5f);
-
-		sLine.draw(gl);
+		// gl.glColor4f(1, 1, 1, 0.5f);
+		// sLine.draw(gl);
 
 		fps.frameDone();
 		// SystemClock.sleep(10);
@@ -202,11 +202,8 @@ public class SnowWallpaperRenderer implements GLWallpaperService.Renderer, Fling
 
 	public synchronized void release()
 	{
-		Log.v(TAG, "release");
-
 		if (bitmapShows.isRecycled() == false)
 		{
-			Log.v(TAG, String.format("bitmap %s is recycled", bitmapShows));
 			bitmapShows.recycle();
 		}
 	}

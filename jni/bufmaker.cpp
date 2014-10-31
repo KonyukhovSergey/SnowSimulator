@@ -5,14 +5,21 @@
 #include "SnowSystem.h"
 #include "Sneginka.h"
 #include "SimplexNoise.h"
+#include <math.h>
 
 SnowSystem ss;
+#define ACCEL_SMOOTH 0.05f
 
 extern "C" {
 
 JNIEXPORT void JNICALL Java_js_jni_code_NativeCalls_ssSetTurbulence(JNIEnv *env,
 		jclass, jfloat value) {
 	turbulence = value;
+}
+
+JNIEXPORT void JNICALL Java_js_jni_code_NativeCalls_ssSetParallax(JNIEnv *env,
+		jclass, jfloat value) {
+	parallax = value;
 }
 
 JNIEXPORT void JNICALL Java_js_jni_code_NativeCalls_ssSetSnowCount(JNIEnv *env,
@@ -29,6 +36,13 @@ JNIEXPORT void JNICALL Java_js_jni_code_NativeCalls_ssInit(JNIEnv *env, jclass,
 		jfloat a, jfloat b) {
 	ss.init(a, b);
 	SimplexNoise::init();
+}
+
+JNIEXPORT void JNICALL Java_js_jni_code_NativeCalls_ssAccel(JNIEnv *env, jclass,
+		jfloat _ax, jfloat _ay, jfloat _az) {
+	ax += (_ax - ax) * ACCEL_SMOOTH;
+	ay += (_ay - ay) * ACCEL_SMOOTH;
+	az += (_az - az) * ACCEL_SMOOTH;
 }
 
 JNIEXPORT jint JNICALL Java_js_jni_code_NativeCalls_ssDraw(JNIEnv *env, jclass,

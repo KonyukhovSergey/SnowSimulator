@@ -7,6 +7,7 @@
     <string name="motion_blur_effect">Эффект размытия</string>
     <string name="touch_sensitivity">Чувствительность к нажатиям</string>
     <string name="turbulence">Турбулентность</string>
+    <string name="parallax">Параллакс</string>
     <string name="snowflakes_count">Количество частиц</string>
     <string name="frames_skip">Пропуск кадров</string>
     <string name="snow_count">Количество снежинок</string>

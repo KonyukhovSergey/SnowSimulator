@@ -1,0 +1,60 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/control_background"
+    android:orientation="horizontal"
+    android:padding="4dp" >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="top"
+            android:textColor="#fff"
+            android:layout_weight="1" />
+
+        <SeekBar
+            android:id="@+id/seek_bar_position"
+            android:layout_width="fill_parent"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="8dp"
+            android:max="7"
+            android:progress="4"
+            android:progressDrawable="@drawable/progress"
+            android:thumb="@drawable/slider_thumb" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/button_left"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/button_background"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/arrow_left" />
+
+        <ImageButton
+            android:id="@+id/button_right"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/button_background"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/arrow_right" />
+    </LinearLayout>
+
+</LinearLayout>

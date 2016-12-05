@@ -1,53 +1,51 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:background="@drawable/control_background">
 
     <TextView
         android:id="@+id/text_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:text="control text"
+        android:text="Control text"
         android:textColor="#fff"
         android:textSize="14sp"/>
 
-    <ImageButton
+    <Button
         android:id="@+id/button_right"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_alignParentRight="true"
+        android:layout_margin="4dp"
         android:background="@drawable/button_background"
-        android:padding="8dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/arrow_right"/>
+        android:text="+"
+        android:textColor="#fff"
+        android:textSize="24dp"
+        />
 
-    <ImageButton
+    <Button
         android:id="@+id/button_left"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:layout_marginRight="4dp"
-        android:layout_toLeftOf="@+id/button_right"
+        android:layout_alignBottom="@id/button_right"
+        android:layout_toLeftOf="@id/button_right"
         android:background="@drawable/button_background"
-        android:padding="8dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/arrow_left"/>
+        android:text="-"
+        android:textColor="#fff"
+        android:textSize="24dp"
+        />
 
     <SeekBar
         android:id="@+id/seek_bar_position"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/button_left"
-        android:layout_marginRight="4dp"
         android:layout_toLeftOf="@id/button_left"
         android:max="7"
         android:progress="4"
         android:progressDrawable="@drawable/progress"
         android:thumb="@drawable/thumb"/>
-
-    <view
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_below="@id/button_right"
-        android:background="#7fff"/>
 
 </RelativeLayout>

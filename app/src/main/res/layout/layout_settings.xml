@@ -83,7 +83,7 @@
                     android:background="@null"
                     android:padding="8dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/arrow_up"/>
+                    android:src="@drawable/ic_arrow_up"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

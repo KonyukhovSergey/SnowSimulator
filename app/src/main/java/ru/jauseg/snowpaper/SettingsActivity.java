@@ -145,7 +145,7 @@ public class SettingsActivity extends Activity
 		if (isControls)
 		{
 			buttonToggleControls.startAnimation(animationRoateCW);
-			buttonToggleControls.setImageResource(R.drawable.arrow_down);
+			buttonToggleControls.setImageResource(R.drawable.ic_arrow_down);
 			layoutControls.startAnimation(animationMoveToUp);
 			layoutControls.setVisibility(View.GONE);
 			buttonDefaultSettings.setVisibility(View.GONE);
@@ -153,7 +153,7 @@ public class SettingsActivity extends Activity
 		} else
 		{
 			buttonToggleControls.startAnimation(animationRoateCCW);
-			buttonToggleControls.setImageResource(R.drawable.arrow_up);
+			buttonToggleControls.setImageResource(R.drawable.ic_arrow_up);
 			layoutControls.startAnimation(animationMoveFromUp);
 			layoutControls.setVisibility(View.VISIBLE);
 			buttonDefaultSettings.setVisibility(View.VISIBLE);

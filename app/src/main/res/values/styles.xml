@@ -5,4 +5,11 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
+    <style name="ThemeTranslucent">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
 </resources>

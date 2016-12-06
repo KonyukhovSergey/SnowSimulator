@@ -49,7 +49,7 @@ public class SettingsActivity extends Activity
 		seekBarMotionBlur = new SeekBarControl(app.indexMotionBlur(), 0, app.tableMotionBlur.length - 1, findViewById(R.id.slider_motion_blur), R.string.motion_blur_effect);
 		seekBarTouchSensitivity = new SeekBarControl(app.indexTouchSensitivity(), 0, app.tableTouchSensitivity.length - 1, findViewById(R.id.slider_touch_sensitivity), R.string.touch_sensitivity);
 		seekBarTurbulence = new SeekBarControl(app.indexTurbulence(), 0, app.tableTurbulence.length - 1, findViewById(R.id.slider_turbulence), R.string.turbulence);
-		seekBarParallax = new SeekBarControl(app.indexParalax(), 0, app.tableParallax.length - 1, findViewById(R.id.slider_parallax), R.string.parallax);
+		seekBarParallax = new SeekBarControl(app.indexParallax(), 0, app.tableParallax.length - 1, findViewById(R.id.slider_parallax), R.string.parallax);
 		seekBarFramesSkip = new SeekBarControl(app.indexFramesSkip(), 0, 6, findViewById(R.id.slider_frames_skip), R.string.frames_skip);
 		seekBarSnowCount = new SeekBarControl(app.indexSnowCount(), 0, app.tableSnowCount.length - 1, findViewById(R.id.slider_snow_count), R.string.snow_count);
 		seekBarSnowSpeed = new SeekBarControl(app.indexSnowSpeed(), 0, app.tableSnowSpeed.length - 1, findViewById(R.id.slider_snow_speed), R.string.snow_speed);
@@ -117,7 +117,7 @@ public class SettingsActivity extends Activity
 					break;
 
 				case R.id.slider_parallax:
-					app.indexParalax(pos);
+					app.indexParallax(pos);
 					break;
 
 				case R.id.slider_frames_skip:

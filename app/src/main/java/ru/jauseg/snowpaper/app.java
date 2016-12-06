@@ -8,7 +8,7 @@ public class app extends Application
 	private static int indexMotionBlur;
 	private static int indexTouchSensitivity;
 	private static int indexTurbulence;
-	private static int indexParalax;
+	private static int indexParallax;
 	private static int indexSnowCount;
 	private static int indexSnowSpeed;
 	private static boolean isBackgroundStatic;
@@ -33,7 +33,7 @@ public class app extends Application
 		indexMotionBlur = Integer.parseInt(cfg.get(SnowSettings.MOTION_BLUR));
 		indexTouchSensitivity = Integer.parseInt(cfg.get(SnowSettings.TOUCH_SENSITIVITY));
 		indexTurbulence = Integer.parseInt(cfg.get(SnowSettings.TURBULENCE));
-		indexParalax = Integer.parseInt(cfg.get(SnowSettings.PARALAX));
+		indexParallax = Integer.parseInt(cfg.get(SnowSettings.PARALAX));
 		indexSnowCount = Integer.parseInt(cfg.get(SnowSettings.SNOW_COUNT));
 		indexSnowSpeed = Integer.parseInt(cfg.get(SnowSettings.SNOW_SPEED));
 		isBackgroundStatic = cfg.get(SnowSettings.BACKGROUND).equals("static");
@@ -69,9 +69,9 @@ public class app extends Application
 		return indexTurbulence;
 	}
 
-	public static int indexParalax()
+	public static int indexParallax()
 	{
-		return indexParalax;
+		return indexParallax;
 	}
 
 	public static int indexSnowCount()
@@ -134,9 +134,9 @@ public class app extends Application
 		//NativeCalls.ssSetTurbulence(tableTurbulence[index]);
 	}
 
-	public static void indexParalax(int index)
+	public static void indexParallax(int index)
 	{
-		indexParalax = index;
+		indexParallax = index;
 		cfg.set(SnowSettings.PARALAX, Integer.toString(index));
 		//NativeCalls.ssSetParallax(tableParallax[index]);
 	}

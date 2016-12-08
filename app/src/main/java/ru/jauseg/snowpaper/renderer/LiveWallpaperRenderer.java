@@ -7,20 +7,21 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView.Renderer;
-import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 
 import ru.jauseg.snowpaper.LiveWallpaperService;
+import ru.serjik.engine.EngineView;
 import ru.serjik.engine.gles20.ShaderProgram;
-import ru.serjik.engine.gles20.Texture;
-import ru.serjik.engine.utils.TimeCounter;
-import ru.serjik.utils.AssetsUtils;
-import ru.serjik.wallpaper.GLWallpaperService.GLWallpaperEngine;
+import ru.serjik.utils.TimeCounter;
+import ru.serjik.wallpaper.GLWallpaperService.WallpaperEngine;
 import ru.serjik.wallpaper.WallpaperOffsetsListener;
 
 public class LiveWallpaperRenderer implements Renderer, WallpaperOffsetsListener
 {
 	private Context context;
-	private GLWallpaperEngine engine;
+	private WallpaperEngine engine;
+	private EngineView view;
 
 	private AssetManager am;
 
@@ -29,11 +30,11 @@ public class LiveWallpaperRenderer implements Renderer, WallpaperOffsetsListener
 	private float offsetTarget = 0;
 	private float offset = 0;
 
-	public LiveWallpaperRenderer(LiveWallpaperService liveWallpaper, GLWallpaperEngine engine)
+	public LiveWallpaperRenderer(Context context, EngineView view, WallpaperEngine engine)
 	{
-		engine.getRenderRequester().delay(50);
+		view.setFrameRate(30);
 		engine.setWallpaperOffsetsListener(this);
-		context = liveWallpaper;
+		this.context = context;
 		this.engine = engine;
 		am = context.getAssets();
 	}
@@ -41,7 +42,6 @@ public class LiveWallpaperRenderer implements Renderer, WallpaperOffsetsListener
 	@Override
 	public void onSurfaceCreated(GL10 gl, EGLConfig config)
 	{
-
 		ShaderProgram.releaseCompiler();
 		GLES20.glClearColor(255, 0, 0, 0);
 	}
@@ -68,7 +68,7 @@ public class LiveWallpaperRenderer implements Renderer, WallpaperOffsetsListener
 	}
 
 	@Override
-	public void onOffsetChanged(float xOffset, float yOffset)
+	public void onOffsetChanged(float xOffset)
 	{
 		offsetTarget = xOffset;
 	}

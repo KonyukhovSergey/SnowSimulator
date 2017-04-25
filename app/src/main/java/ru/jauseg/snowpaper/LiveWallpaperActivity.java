@@ -23,7 +23,7 @@ public class LiveWallpaperActivity extends Activity
 		{
 			finish();
 		}
-	};
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)

@@ -20,6 +20,14 @@
                 android:baselineAligned="false"
                 android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/text_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:textSize="24sp"
+                    android:text="version"/>
+
                 <include
                     android:id="@+id/slider_parallax"
                     layout="@layout/layout_slider"/>
@@ -47,6 +55,7 @@
                 <include
                     android:id="@+id/slider_turbulence"
                     layout="@layout/layout_slider"/>
+
             </LinearLayout>
         </ScrollView>
 

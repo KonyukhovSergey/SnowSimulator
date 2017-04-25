@@ -9,6 +9,7 @@ android {
         targetSdkVersion 23
         versionCode 9
         versionName "2.0"
+        vectorDrawables.generatedDensities('nodpi')
     }
     buildTypes {
         release {
@@ -16,9 +17,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        demo {
+            applicationIdSuffix '.demo'
+
+        }
+        full {
+            applicationIdSuffix '.full'
+        }
+    }
     sourceSets {
         main.java.srcDirs += '..\\..\\OpenEngineLib\\src'
     }
+
 }
 
 dependencies {

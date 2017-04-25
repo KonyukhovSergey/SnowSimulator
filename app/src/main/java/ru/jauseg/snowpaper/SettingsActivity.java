@@ -7,6 +7,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class SettingsActivity extends Activity
 {
@@ -74,6 +75,8 @@ public class SettingsActivity extends Activity
 		layoutControls = findViewById(R.id.layout_controls);
 		buttonDefaultSettings = (Button) findViewById(R.id.button_default_settings);
 		buttonDefaultSettings.setOnClickListener(onClickListener);
+
+		((TextView)findViewById(R.id.text_version)).setText(GetAppType.TAG);
 
 		app.isBackgroundStatic(true);
 	}

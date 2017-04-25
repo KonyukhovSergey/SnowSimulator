@@ -9,9 +9,15 @@ import ru.serjik.wallpaper.GLWallpaperService;
 
 public class LiveWallpaperService extends GLWallpaperService
 {
+	private Renderer renderer;
+
 	@Override
 	public Renderer getRenderer(WallpaperEngine engine, EngineView view)
 	{
-		return new LiveWallpaperRenderer(getBaseContext(), view, engine);
+		if (renderer == null)
+		{
+			renderer = new LiveWallpaperRenderer(getBaseContext(), view, engine);
+		}
+		return renderer;
 	}
 }
